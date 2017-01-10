@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -81,6 +92,17 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Db\LsBuy.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LsBuy.edmx</DependentUpon>
+      <LastGenOutput>LsBuy.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Db\LsBuy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LsBuy.edmx</DependentUpon>
+      <LastGenOutput>LsBuy.cs</LastGenOutput>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -91,6 +113,13 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <EntityDeploy Include="Db\LsBuy.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LsBuy.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Db\LsBuy.edmx.diagram">
+      <DependentUpon>LsBuy.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Images\red.jpg" />
     <Content Include="Images\saix.jpg" />
@@ -108,11 +137,54 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Db\Address.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\LsBuy.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LsBuy.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\LsBuy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\LsBuy.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LsBuy.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Db\Message.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\Order.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\OrderDetail.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\Part.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\PartType.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\Product.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\ShoppingChart.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\User.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginVModel.cs" />
+    <Compile Include="ViewModels\RegistVModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -133,6 +205,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
