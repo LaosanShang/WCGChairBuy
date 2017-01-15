@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WCGChairBuy.Web.Db;
 using WCGChairBuy.Web.ViewModels;
 
@@ -31,9 +32,26 @@ namespace WCGChairBuy.Web.Controllers
         /// 检查登录
         /// </summary>
         /// <returns></returns>
-        public ActionResult CheckLogin(LoginVModel loginVModel)
+        public ActionResult CheckLogin(LoginVModel loginVModel, string ReturnUrl)
         {
-            return Redirect("Index");
+            using (LsBuyEntities db = new LsBuyEntities())
+            {
+                if (!ModelState.IsValid) return View("Login", loginVModel);
+                else
+                {
+                    var user = db.Users.Where(t => t.UserName == loginVModel.UserName)
+                        .Where(t => t.Password == loginVModel.Password)
+                        .FirstOrDefault();
+                    if (user == null)
+                    {
+                        ModelState.AddModelError("UserName", "用户名或密码错误");
+                        return View("Login", loginVModel);
+                    }
+                    FormsAuthentication.SetAuthCookie(loginVModel.UserName, false);
+                    return Redirect(ReturnUrl??"Index");
+                }
+            }
+
         }
 
         /// <summary>
@@ -56,7 +74,8 @@ namespace WCGChairBuy.Web.Controllers
                 {
                     if (db.Users.Where(t => t.Email == registVModel.Email).Count() > 0)
                     {
-                        //ModelState.
+                        ModelState.AddModelError("Email", "邮箱已注册！");
+                        return View("Regist", registVModel);
                     }
                     else
                     {
@@ -80,6 +99,6 @@ namespace WCGChairBuy.Web.Controllers
             {
                 return View("Regist", registVModel);
             }
-            }
         }
     }
+}

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - WCGChairBuy.COM</title>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
@@ -27,8 +28,16 @@
                     <li><a href="@Url.Action("Login")">马上定制</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("Login")">请登录</a></li>
-                    <li><a href="@Url.Action("Regist")">注册</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="@Url.Action("Index","PersonalCenter")" class="btn btn-link">你好!@User.Identity.Name</a></li>
+                        <li><a href="@Url.Action("ShoppingCharts")" class="btn btn-link">购物车</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Login")">请登录</a></li>
+                        <li><a href="@Url.Action("Regist")">注册</a></li>
+                    }
                 </ul>
             </div>
             <div></div>
@@ -37,6 +46,7 @@
     
 
     <div class="container body-content">
+        <div style="height:60px;"></div>
         @RenderBody()
         <hr />
         <footer>

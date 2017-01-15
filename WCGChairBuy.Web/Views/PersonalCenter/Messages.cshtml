@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="@Url.Action("Index")" class="list-group-item "> 个人中心 </a>
+                <a href="@Url.Action("ShoppingCharts")" class="list-group-item">购物车</a>
+                <a href="@Url.Action("Addresses")" class="list-group-item">收货地址</a>
+                <a href="@Url.Action("Messages")" class="list-group-item active">我的留言</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
