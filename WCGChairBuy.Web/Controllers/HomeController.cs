@@ -17,7 +17,22 @@ namespace WCGChairBuy.Web.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View();
+            using (LsBuyEntities db = new LsBuyEntities())
+            {
+                IndexVModel indexVm = new IndexVModel();
+                List<Product> products = db.Products.ToList();
+                products.ForEach(t => indexVm.ProductList.Add(new ProductVModel
+                {
+                    Id = t.Id,
+                    ProductName = t.ProductName,
+                    ModelNumber = t.ModelNumber,
+                    ImageUrl = t.ImageUrl,
+                    Price = t.Price,
+                    Description = t.Description
+                }));
+
+                return View(indexVm);
+            }
         }
 
         /// <summary>
@@ -48,7 +63,7 @@ namespace WCGChairBuy.Web.Controllers
                         return View("Login", loginVModel);
                     }
                     FormsAuthentication.SetAuthCookie(loginVModel.UserName, false);
-                    return Redirect(ReturnUrl??"Index");
+                    return Redirect(ReturnUrl ?? "Index");
                 }
             }
 
@@ -81,7 +96,6 @@ namespace WCGChairBuy.Web.Controllers
                     {
                         Db.User user = new Db.User
                         {
-                            Id = Guid.NewGuid().ToString(),
                             Email = registVModel.Email,
                             Phone = registVModel.Phone,
                             UserType = 0,

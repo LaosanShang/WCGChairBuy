@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WCGChairBuy.Web.ViewModels.IndexVModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
@@ -13,33 +14,25 @@
 <h3>产品列表</h3>
 </div>
 <div class="row">
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="~/Images/red.jpg" alt="...">
-            <div class="caption">
-                <h2>红色</h2>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+    @foreach (var p in Model.ProductList)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="~/Images/@p.ImageUrl" alt="...">
+                <div class="caption">
+                    <h2>@p.ProductName</h2>
+                    <p style="color:orangered;font-size:1.8em;">￥@p.Price.ToString("f2")</p>
+                    @if (!string.IsNullOrEmpty(p.Description))
+                    {
+                        <p>@p.Description</p>
+                    }
+                    <p>
+                        <a href="@Url.Action("Index","CustomerMade",new {pid = p.Id })" class="btn btn-primary" role="button">立即定制</a> 
+                        <a href="#" class="btn btn-default" role="button">加入购物车</a>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="~/Images/red.jpg" alt="...">
-            <div class="caption">
-                <h3>高度</h3>
-                <p><a href="#" class="btn btn-primary" role="button">我也要</a> <a href="#" class="btn btn-default" role="button">收藏先</a></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="~/Images/saix.jpg" alt="...">
-            <div class="caption">
-                <h3>蓝色</h3>
-                <p>随便加点说明啊</p>
-                <p><a href="#" class="btn btn-primary" role="button">我也要</a> <a href="#" class="btn btn-default" role="button">收藏先</a></p>
-            </div>
-        </div>
-    </div>
+    }
 </div>
 

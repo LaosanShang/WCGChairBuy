@@ -1,9 +1,9 @@
-﻿
+﻿@using WCGChairBuy.Web.ViewModels;
+@model ShoppingChartsVModel
 @{
     ViewBag.Title = "购物车";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -14,8 +14,47 @@
                 <a href="@Url.Action("Messages")" class="list-group-item">我的留言</a>
             </div>
         </div>
-        <div class="col-md-3">
-
+        <div class="col-md-9">
+            @if (Model.ShoppingCharts.Count < 1)
+            {
+                <h3>你的购物车空空如也~</h3>
+            }
+            else
+            {
+                <form action="@Url.Action("ConfirmOrder")">
+                    @foreach (ShoppingChartVModel spc in Model.ShoppingCharts)
+                    {
+                    <div class="panel panel-default">
+                        <div class="panel-body" width="100%">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="~/Images/@spc.ImageUrl" height="120" />
+                                </div>
+                                <div class="col-md-2">
+                                    <p>价格:@spc.Price</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>颜色:<i class="glyphicon glyphicon-stop" style="color:@spc.Color"></i></p>
+                                    <p>文字:@spc.Text</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>图案:<img src="~/Images/selectImgs/@spc.ImageName" height="100" /></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="checkbox" name="id" value="@spc.CustomerProductId" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <h3>收货地址：</h3>
+                    @foreach (AddressVModel ad in Model.Addresses)
+                    {
+                        <p><input type="radio" name="AddressId" value="@ad.Id" />@ad.Content</p>
+                    }
+                    <button class="btn btn-success">提交订单</button>
+                </form>
+            }
         </div>
     </div>
 </div>

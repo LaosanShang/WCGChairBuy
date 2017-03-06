@@ -14,9 +14,9 @@ namespace WCGChairBuy.Web.Db
     
     public partial class ShoppingChart
     {
-        public string Id { get; set; }
-        public string UserId { get; set; }
-        public string ProductId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int ProductId { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
     }
 }

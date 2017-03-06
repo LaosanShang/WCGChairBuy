@@ -14,11 +14,14 @@ namespace WCGChairBuy.Web.Db
     
     public partial class Product
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string UserId { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
         public Nullable<System.DateTime> UpdatedTime { get; set; }
+        public string ModelNumber { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

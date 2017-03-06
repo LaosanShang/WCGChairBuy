@@ -26,11 +26,10 @@ namespace WCGChairBuy.Web.Db
         }
     
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<CustomerProduct> CustomerProducts { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Part> Parts { get; set; }
-        public virtual DbSet<PartType> PartTypes { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ShoppingChart> ShoppingCharts { get; set; }
         public virtual DbSet<User> Users { get; set; }

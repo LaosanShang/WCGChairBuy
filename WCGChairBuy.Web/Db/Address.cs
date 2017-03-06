@@ -14,10 +14,12 @@ namespace WCGChairBuy.Web.Db
     
     public partial class Address
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Content { get; set; }
-        public string UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
         public Nullable<System.DateTime> UpdatedTime { get; set; }
+        public string Receiver { get; set; }
+        public string Phone { get; set; }
     }
 }

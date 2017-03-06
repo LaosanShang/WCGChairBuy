@@ -1,0 +1,130 @@
+﻿@model WCGChairBuy.Web.ViewModels.CustomerMadeVModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    body {
+        overflow-x: hidden;
+    }
+
+    .list-group-item-h {
+        height: 120px;
+        line-height: 100px;
+        cursor: pointer;
+    }
+
+    .list-group-item:hover {
+        cursor: pointer;
+        background: #eee;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //选择颜色单击事件
+        $('#selectColors').click(function () {
+            //颜色选择面板 动画到距离右边10px 速度：快速
+            $("#colorPanel").animate({ right: '10px' }, 'fast');
+            $("#colorPanel .list-group-item").click(function () {
+                alert($(this).val());
+                $("#hidColor").val($(this).attr("value"));
+                //颜色选择面板 动画到距离右边-150px[隐藏] 速度：快速
+                $("#colorPanel").animate({ right: '-230px' }, 'fast');
+            });
+        });
+        //选输入文字单击事件
+        $('#selectText').click(function () {
+            //文字输入面板 动画到距离右边10px 速度：快速
+            $("#textPanel").animate({ right: '10px' }, 'fast');
+            $("#textConfirm").click(function () {
+                //赋值
+                $("#hidText").val($("#textPanel input").val());
+                alert($("#textPanel input").val());
+                //文本输入面板 动画到距离右边-250px[隐藏] 速度：快速
+                $("#textPanel").animate({ right: '-250px' }, 'fast');
+            });
+        });
+
+        //选输入图案单击事件
+        $('#selectImg').click(function () {
+            //图案选择面板 动画到距离右边10px 速度：快速
+            $("#imgPanel").animate({ right: '10px' }, 'fast');
+            $("#imgPanel .list-group-item").click(function () {
+                $("#hidImage").val($(this).attr("value"));
+                //图案选择面板 动画到距离右边-250px[隐藏] 速度：快速
+                $("#imgPanel").animate({ right: '-250px' }, 'fast');
+            });
+        });
+    });
+</script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9">
+            <img src="~/Images/@Model.Product.ImageUrl" />
+        </div>
+        <div class="col-md-3">
+            @using (Html.BeginForm("Add", "ShoppingChart", FormMethod.Post))
+            {
+                @Html.HiddenFor(t=>t.CustomerProduct.ProductId)
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-h" id="selectColors">
+                        选择您喜欢的颜色
+                        @Html.HiddenFor(t => t.CustomerProduct.Color, new { id = "hidColor" })
+                        <img src="~/Images/color_lens_72px.png" />
+                    </div>
+                    <div class="list-group-item list-group-item-h" id="selectText">
+                        输入您的个性文字
+                        @Html.HiddenFor(t => t.CustomerProduct.Text, new { id = "hidText" })
+                        <img src="~/Images/text_message_72px.png" />
+                    </div>
+                    <div class="list-group-item list-group-item-h" id="selectImg">
+                        选择您喜欢的图案
+                        @Html.HiddenFor(t => t.CustomerProduct.Image, new { id = "hidImage" })
+                        <img src="~/Images/image_97.png" />
+                    </div>
+                </div>
+            <!--完成定制-->
+                <input type="submit" class="btn btn-success btn-block" value="完成定制" />@*&nbsp;<i class="glyphicon glyphicon-ok"></i></input>*@
+            <!--取消定制-->
+                <a class="btn btn-danger btn-block" href="@Url.Action("Index", "Home")">取消定制&nbsp;<i class="glyphicon glyphicon-remove"></i></a>
+            }
+        </div>
+    </div>
+</div>
+
+<!--颜色选择面板-->
+<div class="list-group" style="position:absolute;right:-150px;top:110px;" id="colorPanel">
+    <div class="list-group-item" value="red">
+        <div style="background:red; height:50px;width:100px;"></div>
+    </div>
+    <div class="list-group-item" value="blue">
+        <div style="background:blue; height:50px;width:100px;"></div>
+    </div>
+    <div class="list-group-item" value="black">
+        <div style="background:black; height:50px;width:100px;"></div>
+    </div>
+</div>
+<!--文字输入面板-->
+<div class="list-group" style="position:absolute;right:-280px;top:230px;" id="textPanel">
+    <div class="list-group-item">
+        <div class="input-group" style="width:220px">
+            <input type="text" class="form-control" placeholder="个性文字">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="textConfirm"><i class="glyphicon glyphicon-ok"></i></button>
+            </span>
+        </div>
+
+    </div>
+</div>
+<!--图案选择面板-->
+<div class="list-group" style="position:absolute;right:-250px;top:350px;" id="imgPanel">
+    <div class="list-group-item" style="text-align:center;" value="img1.png">
+        <img src="~/Images/selectImgs/img1.png" height="100" />
+    </div>
+    <div class="list-group-item" style="text-align:center;" value="img2.png">
+        <img src="~/Images/selectImgs/img2.png" height="100" />
+    </div>
+    <div class="list-group-item" style="text-align:center;" value="img3.png">
+        <img src="~/Images/selectImgs/img3.png" height="100" />
+    </div>
+</div>

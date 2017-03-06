@@ -25,7 +25,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="@Url.Action("Login")">马上定制</a></li>
+                    <li><a href="@Url.Action("Login","Home")">马上定制</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
@@ -35,8 +35,8 @@
                     }
                     else
                     {
-                        <li><a href="@Url.Action("Login")">请登录</a></li>
-                        <li><a href="@Url.Action("Regist")">注册</a></li>
+                        <li><a href="@Url.Action("Login","Home")">请登录</a></li>
+                        <li><a href="@Url.Action("Regist","Home")">注册</a></li>
                     }
                 </ul>
             </div>

@@ -40,3 +40,7 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+*{
+    font-family:'微软雅黑','Microsoft YaHei';
+}

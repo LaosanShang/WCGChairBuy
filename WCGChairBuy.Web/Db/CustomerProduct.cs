@@ -12,10 +12,12 @@ namespace WCGChairBuy.Web.Db
     using System;
     using System.Collections.Generic;
     
-    public partial class PartType
+    public partial class CustomerProduct
     {
-        public string Id { get; set; }
-        public string PartTypeName { get; set; }
-        public string ImageUrl { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public string Color { get; set; }
+        public string Image { get; set; }
+        public string Text { get; set; }
     }
 }

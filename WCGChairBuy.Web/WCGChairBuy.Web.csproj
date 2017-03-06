@@ -125,8 +125,15 @@
       <DependentUpon>LsBuy.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Images\color_lens_72px.png" />
+    <Content Include="Images\image_97.png" />
     <Content Include="Images\red.jpg" />
     <Content Include="Images\saix.jpg" />
+    <Content Include="Images\selectImgs\img1.png" />
+    <Content Include="Images\selectImgs\img2.png" />
+    <Content Include="Images\selectImgs\img3.png" />
+    <Content Include="Images\text_message_72px.png" />
+    <Content Include="Images\white.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -140,9 +147,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerMadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonalCenterController.cs" />
+    <Compile Include="Controllers\ShoppingChartController.cs" />
     <Compile Include="Db\Address.cs">
+      <DependentUpon>LsBuy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Db\CustomerProduct.cs">
       <DependentUpon>LsBuy.tt</DependentUpon>
     </Compile>
     <Compile Include="Db\LsBuy.Context.cs">
@@ -169,12 +181,6 @@
     <Compile Include="Db\OrderDetail.cs">
       <DependentUpon>LsBuy.tt</DependentUpon>
     </Compile>
-    <Compile Include="Db\Part.cs">
-      <DependentUpon>LsBuy.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Db\PartType.cs">
-      <DependentUpon>LsBuy.tt</DependentUpon>
-    </Compile>
     <Compile Include="Db\Product.cs">
       <DependentUpon>LsBuy.tt</DependentUpon>
     </Compile>
@@ -188,9 +194,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddressVModel.cs" />
+    <Compile Include="ViewModels\CustomerMadeVModel.cs" />
+    <Compile Include="ViewModels\CustomerProductVModel.cs" />
+    <Compile Include="ViewModels\IndexVModel.cs" />
     <Compile Include="ViewModels\LoginVModel.cs" />
     <Compile Include="ViewModels\PersonalCenterVModel.cs" />
+    <Compile Include="ViewModels\ProductVModel.cs" />
     <Compile Include="ViewModels\RegistVModel.cs" />
+    <Compile Include="ViewModels\ShoppingChartsVModel.cs" />
+    <Compile Include="ViewModels\ShoppingChartVModel.cs" />
     <Compile Include="ViewModels\UserVModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +219,10 @@
     <Content Include="Views\PersonalCenter\ShoppingCharts.cshtml" />
     <Content Include="Views\PersonalCenter\Messages.cshtml" />
     <Content Include="Views\PersonalCenter\Addresses.cshtml" />
+    <Content Include="Views\PersonalCenter\AddAddress.cshtml" />
+    <Content Include="Views\CustomerMade\Index.cshtml" />
+    <Content Include="Views\PersonalCenter\ModifyAddress.cshtml" />
+    <Content Include="Views\ShoppingChart\AddSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

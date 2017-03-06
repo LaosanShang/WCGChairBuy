@@ -14,8 +14,8 @@ namespace WCGChairBuy.Web.Db
     
     public partial class OrderDetail
     {
-        public string Id { get; set; }
-        public string OrderId { get; set; }
+        public int Id { get; set; }
+        public string OrderNo { get; set; }
         public string ProductId { get; set; }
     }
 }

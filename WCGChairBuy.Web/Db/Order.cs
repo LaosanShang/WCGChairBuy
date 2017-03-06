@@ -14,10 +14,11 @@ namespace WCGChairBuy.Web.Db
     
     public partial class Order
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int OrderStatus { get; set; }
         public string AddressId { get; set; }
-        public string UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
+        public string OrderNo { get; set; }
     }
 }

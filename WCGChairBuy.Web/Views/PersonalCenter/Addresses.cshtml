@@ -1,4 +1,5 @@
-﻿
+﻿@using WCGChairBuy.Web.ViewModels
+@model IEnumerable<AddressVModel>
 @{
     ViewBag.Title = "Addresses";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,8 +15,24 @@
                 <a href="@Url.Action("Messages")" class="list-group-item">我的留言</a>
             </div>
         </div>
-        <div class="col-md-3">
-
+        <div class="col-md-9">
+            <a class="btn btn-success text-right" href="@Url.Action("AddAddress")">新增</a>
+            @foreach (AddressVModel address in Model.ToList())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">收货人：@address.Reveiver , @address.Phone</h3>
+                    </div>
+                    <div class="panel-body">
+                        @address.Content
+                    </div>
+                    <div class="panel-footer">
+                        <a class="btn btn-info text-right" href="@Url.Action("ModifyAddress")?id=@address.Id">修改</a>
+                        <a class="btn btn-danger text-right" href="@Url.Action("DeleteAddress")?id=@address.Id">删除</a>
+                    </div>
+                </div>
+            }
+            
         </div>
     </div>
 </div>
