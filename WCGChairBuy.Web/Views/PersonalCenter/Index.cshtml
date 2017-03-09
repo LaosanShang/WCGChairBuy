@@ -2,6 +2,11 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">
+    li {
+        list-style: none;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -57,25 +62,10 @@
                                     }
                                 </a>
                             </div>
-                                
-                                @*<div class="col-md-1">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="Sex" id="optionsRadios1" value="1" checked="checked">男
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="Sex" id="optionsRadios2" value="0">女
-                    </label>
-                </div>
-            </div>*@
-                                <div class="col-md-4">
-                                    @Html.ValidationMessageFor(m => m.User.Sex)
-                                </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.User.Sex)
                             </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <a class="btn btn-link">修改</a>
@@ -91,7 +81,40 @@
                 </div>
                 <div class="panel-body">
 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>产品</th>
+                                <th>订单号</th>
+                                <th>收货人</th>
+                                <th>订单状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Orders.GroupBy(t => new { t.OrderNo, t.OrderStatus, t.Receiver }).ToList())
+                            {
+
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            @foreach (var detail in order.ToList())
+                                            {
+                                                <li>
+                                                    <img src="~/Images/@detail.ImageUrl" height="60" />
+                                                    <a class="btn btn-link">@detail.ProductName</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </td>
+                                    <td><span>@order.Key.OrderNo</span></td>
+                                    <td><span>@order.Key.Receiver</span></td>
+                                    <td><span>@order.Key.OrderStatus</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
     </div>

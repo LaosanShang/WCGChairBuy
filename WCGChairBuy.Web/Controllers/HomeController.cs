@@ -68,6 +68,15 @@ namespace WCGChairBuy.Web.Controllers
             }
 
         }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index","Home");
+        }
 
         /// <summary>
         /// 注册页面

@@ -20,9 +20,26 @@ namespace WCGChairBuy.Web.Controllers
         {
             using (LsBuyEntities db = new LsBuyEntities())
             {
+                #region 用户信息
                 PersonalCenterVModel vm = new PersonalCenterVModel();
                 User user = db.Users.Where(t => t.UserName == User.Identity.Name).FirstOrDefault();
                 vm.User = new UserVModel { Sex = (int)user.Sex, Email = user.Email, Phone = user.Phone };
+                #endregion
+
+                #region 订单列表
+                List<OrderVModel> orders = new List<OrderVModel>();
+                //根据用户Id获取订单列表
+                orders = db.Database.SqlQuery<OrderVModel>(@"select o.OrderNo,p.ImageUrl,ad.Receiver,ad.Content Address,o.OrderStatus,p.Price,p.ProductName
+from orders o
+left join OrderDetails d on o.OrderNo = d.OrderNo
+left join Addresses ad on ad.Id = o.AddressId
+left join CustomerProducts cp on cp.Id = d.ProductId
+left join Products p on cp.ProductId = p.Id
+where o.UserId = @userId", new SqlParameter("userId", user.Id)).ToList();
+
+                vm.Orders = orders;
+                #endregion
+
                 return View(vm);
             }
         }
@@ -42,9 +59,10 @@ t3.Price,t3.ProductName,t3.ModelNumber,t3.ImageUrl
 from ShoppingCharts t1
 left join CustomerProducts t2 on t1.ProductId= t2.Id
 left join Products t3 on t2.ProductId = t3.Id
-where t1.UserId = @userId", new SqlParameter("userId",user.Id)).ToList();
-                List<AddressVModel> addresses = db.Database.SqlQuery<AddressVModel>(@"select * from Addresses where UserId=@userId",new SqlParameter("userId", user.Id)).ToList();
-                return View(new ShoppingChartsVModel {
+where t1.UserId = @userId", new SqlParameter("userId", user.Id)).ToList();
+                List<AddressVModel> addresses = db.Database.SqlQuery<AddressVModel>(@"select * from Addresses where UserId=@userId", new SqlParameter("userId", user.Id)).ToList();
+                return View(new ShoppingChartsVModel
+                {
                     Addresses = addresses,
                     ShoppingCharts = spcharts
                 });
@@ -54,7 +72,7 @@ where t1.UserId = @userId", new SqlParameter("userId",user.Id)).ToList();
         /// 提交订单
         /// </summary>
         /// <returns></returns>
-        public ActionResult ConfirmOrder(int[] id,string AddressId)
+        public ActionResult ConfirmOrder(int[] id, string AddressId)
         {
             using (LsBuyEntities db = new LsBuyEntities())
             {
@@ -70,12 +88,31 @@ where t1.UserId = @userId", new SqlParameter("userId",user.Id)).ToList();
                     OrderNo = orderNo
                 };
                 db.Orders.Add(order);
-                db.SaveChanges(); 
+                //订单详情
+                db.ShoppingCharts.Where(t => id.Contains(t.Id)).ToList()
+                    .ForEach(t =>
+                    {
+                        OrderDetail detail = new OrderDetail
+                        {
+                            OrderNo = orderNo,
+                            ProductId = t.ProductId.ToString()
+                        };
+                        db.OrderDetails.Add(detail);
+                    });
+                //保存
+                db.SaveChanges();
                 #endregion
-                return Content("");
+                return RedirectToAction("ConfirmOrderSuccess");
             }
         }
-
+        /// <summary>
+        /// 提交订单成功
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ConfirmOrderSuccess()
+        {
+            return View();
+        }
 
         #region 收货地址
         /// <summary>

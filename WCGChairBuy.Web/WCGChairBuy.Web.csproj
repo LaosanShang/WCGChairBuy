@@ -147,10 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CustomerMadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonalCenterController.cs" />
     <Compile Include="Controllers\ShoppingChartController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Db\Address.cs">
       <DependentUpon>LsBuy.tt</DependentUpon>
     </Compile>
@@ -199,6 +201,7 @@
     <Compile Include="ViewModels\CustomerProductVModel.cs" />
     <Compile Include="ViewModels\IndexVModel.cs" />
     <Compile Include="ViewModels\LoginVModel.cs" />
+    <Compile Include="ViewModels\OrderVModel.cs" />
     <Compile Include="ViewModels\PersonalCenterVModel.cs" />
     <Compile Include="ViewModels\ProductVModel.cs" />
     <Compile Include="ViewModels\RegistVModel.cs" />
@@ -223,6 +226,14 @@
     <Content Include="Views\CustomerMade\Index.cshtml" />
     <Content Include="Views\PersonalCenter\ModifyAddress.cshtml" />
     <Content Include="Views\ShoppingChart\AddSuccess.cshtml" />
+    <Content Include="Views\PersonalCenter\ConfirmOrderSuccess.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutManage.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -233,6 +244,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\UserManage\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

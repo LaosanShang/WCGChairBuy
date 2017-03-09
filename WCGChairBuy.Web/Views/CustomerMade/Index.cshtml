@@ -26,7 +26,7 @@
             //颜色选择面板 动画到距离右边10px 速度：快速
             $("#colorPanel").animate({ right: '10px' }, 'fast');
             $("#colorPanel .list-group-item").click(function () {
-                alert($(this).val());
+                //alert($(this).val());
                 $("#hidColor").val($(this).attr("value"));
                 //颜色选择面板 动画到距离右边-150px[隐藏] 速度：快速
                 $("#colorPanel").animate({ right: '-230px' }, 'fast');
@@ -39,7 +39,7 @@
             $("#textConfirm").click(function () {
                 //赋值
                 $("#hidText").val($("#textPanel input").val());
-                alert($("#textPanel input").val());
+                //alert($("#textPanel input").val());
                 //文本输入面板 动画到距离右边-250px[隐藏] 速度：快速
                 $("#textPanel").animate({ right: '-250px' }, 'fast');
             });
