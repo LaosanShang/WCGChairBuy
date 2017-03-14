@@ -3,20 +3,102 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
 }
-<div class="jumbotron">
-    <h2>定制你的专属电竞座椅...</h2>
-    <img height="160" src="~/Images/red.jpg" alt="boom">
-    <p>型号: HDNY090系列</p>
-    
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">马上定制</a></p>
+<link href="~/Content/swiper.css" rel="stylesheet" />
+<script src="~/Scripts/swiper.js"></script>
+
+<style>
+    .swiper-container {
+        width: 100%;
+        height: 300px;
+        margin: 20px auto;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            spaceBetween: 30,
+        });
+    });
+</script>
+<div class="row">
+    <div class="col-lg-9">
+        <div class="thumbnail">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="~/Images/Sliders/slider1.png" height="300px" />
+                    </div>
+                    <div class="swiper-slide"><img src="~/Images/Sliders/slider2.png" height="300px" /></div>
+                    <div class="swiper-slide"><img src="~/Images/Sliders/slider3.png" height="300px" /></div>
+                    <div class="swiper-slide"><img src="~/Images/Sliders/slider4.png" height="300px" /></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="thumbnail">
+            <div class="text-center" style="height:340px; padding-top:30px;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p>
+                        <img src="~/Images/user_in.png" height="100px"/>
+                    </p>
+                    <p>
+                        Hi!~@User.Identity.Name !
+                    </p>
+                    <p>
+                        <a class="btn btn-primary" href="@Url.Action("Index","PersonalCenter")">个人中心</a>
+                        <a class="btn btn-danger" href="@Url.Action("Logout","Home")">退出登录</a>
+                    </p>
+                    
+                }
+                else
+                {
+                    <p><img src="~/Images/user_out.png" height="100px" /></p>
+                    <p>
+                        <a class="btn btn-success" href="@Url.Action("Login","Home")">登录</a>
+                        <a href="@Url.Action("Regist","Home")">注册</a>
+                    </p>
+                }
+                <p>
+                    欢迎您访问www.WCGChairBuy.com!
+                </p>
+                <p>
+                    祝您购物愉快！
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row">
-<h3>产品列表</h3>
+    <h3>产品列表</h3>
 </div>
 <div class="row">
     @foreach (var p in Model.ProductList)
     {
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-4 col-md-3">
             <div class="thumbnail">
                 <img src="~/Images/@p.ImageUrl" alt="...">
                 <div class="caption">
@@ -27,7 +109,7 @@
                         <p>@p.Description</p>
                     }
                     <p>
-                        <a href="@Url.Action("Index","CustomerMade",new {pid = p.Id })" class="btn btn-primary" role="button">立即定制</a> 
+                        <a href="@Url.Action("Index","CustomerMade",new {pid = p.Id })" class="btn btn-primary" role="button">立即定制</a>
                         <a href="#" class="btn btn-default" role="button">加入购物车</a>
                     </p>
                 </div>

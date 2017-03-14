@@ -10,30 +10,24 @@ using WCGChairBuy.Web.Db;
 
 namespace WCGChairBuy.Web.Controllers
 {
-    /// <summary>
-    /// 用户管理控制器
-    /// </summary>
     [Authorize]
-    public class UsersController : Controller
+    public class ProductsController : Controller
     {
-        /// <summary>
-        /// 数据上下文
-        /// </summary>
         private LsBuyEntities db = new LsBuyEntities();
 
         /// <summary>
-        /// 首页
+        /// 产品管理主页
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Products.ToList());
         }
 
         /// <summary>
-        /// 详细信息
+        /// 产品详细信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">产品Id</param>
         /// <returns></returns>
         public ActionResult Details(int? id)
         {
@@ -41,16 +35,16 @@ namespace WCGChairBuy.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(product);
         }
 
         /// <summary>
-        /// 新增
+        /// 新增产品
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
@@ -59,59 +53,67 @@ namespace WCGChairBuy.Web.Controllers
         }
 
         /// <summary>
-        /// 创建
+        /// 添加产品
         /// </summary>
-        /// <param name="user">用户信息</param>
+        /// <param name="product">产品信息</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserName,Password,Email,UserType,Phone,Sex")] User user)
+        public ActionResult Create([Bind(Include = "Id,ProductName,Price,UserId,CreatedTime,UpdatedTime,ModelNumber,Description,ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                product.CreatedTime = DateTime.Now;
+                product.UpdatedTime = DateTime.Now;
+                product.UserId = User.Identity.Name;
+                db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(product);
         }
 
-        /// <summary>
-        /// 修改
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(product);
         }
 
         /// <summary>
-        /// 修改提交
+        /// 编辑提交
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="product">产品信息</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserName,Password,Email,UserType,Phone,Sex")] User user)
+        public ActionResult Edit([Bind(Include = "Id,ProductName,Price,UserId,CreatedTime,UpdatedTime,ModelNumber,Description,ImageUrl")] Product product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                Product p = db.Products.Where(t => t.Id == product.Id).FirstOrDefault();
+                //修改赋值
+                p.UpdatedTime = DateTime.Now;
+                p.ProductName = product.ProductName;
+                p.Price = product.Price;
+                p.ModelNumber = product.ModelNumber;
+                p.ImageUrl = product.ImageUrl;
+                p.Description = product.Description;
+                //标识为修改
+                db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(product);
         }
 
         /// <summary>
@@ -125,12 +127,12 @@ namespace WCGChairBuy.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(product);
         }
 
         /// <summary>
@@ -142,8 +144,8 @@ namespace WCGChairBuy.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            Product product = db.Products.Find(id);
+            db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

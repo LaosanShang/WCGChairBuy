@@ -97,6 +97,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\swiper.css" />
     <Content Include="Db\LsBuy.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LsBuy.edmx</DependentUpon>
@@ -132,7 +133,13 @@
     <Content Include="Images\selectImgs\img1.png" />
     <Content Include="Images\selectImgs\img2.png" />
     <Content Include="Images\selectImgs\img3.png" />
+    <Content Include="Images\Sliders\slider1.png" />
+    <Content Include="Images\Sliders\slider2.png" />
+    <Content Include="Images\Sliders\slider3.png" />
+    <Content Include="Images\Sliders\slider4.png" />
     <Content Include="Images\text_message_72px.png" />
+    <Content Include="Images\user_in.png" />
+    <Content Include="Images\user_out.png" />
     <Content Include="Images\white.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -143,6 +150,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\swiper.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +159,7 @@
     <Compile Include="Controllers\CustomerMadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonalCenterController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingChartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Db\Address.cs">
@@ -234,6 +243,11 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
