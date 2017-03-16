@@ -7,7 +7,7 @@
 
 <h2>产品管理-新增</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Products", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -57,7 +57,8 @@
                 图片
             </label>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control" })
+                <input type="file" name="ImageUrl" class="form-control" />
+                @*@Html.(model => model.ImageUrl, new { @class = "form-control" })*@
                 @Html.ValidationMessageFor(model => model.ImageUrl)
             </div>
         </div>
