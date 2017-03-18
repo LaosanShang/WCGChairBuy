@@ -46,8 +46,8 @@
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.Action("Index","Users")">用户管理</a></li>
                     <li><a href="@Url.Action("Index","Products")">产品管理</a></li>
-                    <li><a href="@Url.Action("OrderManage","Admin")">订单管理</a></li>
-                    <li><a href="@Url.Action("MessageManage","Admin")">消息管理</a></li>
+                    <li><a href="@Url.Action("Index","Orders")">订单管理</a></li>
+                    @*<li><a href="@Url.Action("Index","Message")">消息管理</a></li>*@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)

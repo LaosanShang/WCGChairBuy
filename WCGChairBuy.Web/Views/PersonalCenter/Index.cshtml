@@ -23,7 +23,7 @@
                     <h3 class="panel-title">用户信息</h3>
                 </div>
                 <div class="panel-body">
-                    @using (Html.BeginForm("Modify", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("Modify", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form",id="orderForm"}))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-group">
@@ -91,7 +91,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var order in Model.Orders.GroupBy(t => new { t.OrderNo, t.OrderStatus, t.Receiver }).ToList())
+                            @foreach (var order in Model.Orders.GroupBy(t => new { t.OrderNo, t.OrderStatus, t.Receiver,t.OrderStatusName }).ToList())
                             {
 
                                 <tr>
@@ -108,7 +108,7 @@
                                     </td>
                                     <td><span>@order.Key.OrderNo</span></td>
                                     <td><span>@order.Key.Receiver</span></td>
-                                    <td><span>@order.Key.OrderStatus</span></td>
+                                    <td><span>@order.Key.OrderStatusName</span></td>
                                 </tr>
                             }
                         </tbody>

@@ -16,5 +16,7 @@ namespace WCGChairBuy.Web.ViewModels
         public List<ShoppingChartVModel> ShoppingCharts { get; set; }
 
         public List<AddressVModel> Addresses { get; set; }
+
+        public string ValidMessage { get; set; }
     }
 }

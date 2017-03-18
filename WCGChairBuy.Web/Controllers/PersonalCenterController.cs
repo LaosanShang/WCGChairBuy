@@ -74,6 +74,28 @@ where t1.UserId = @userId", new SqlParameter("userId", user.Id)).ToList();
         /// <returns></returns>
         public ActionResult ConfirmOrder(int[] id, string AddressId)
         {
+            if(id==null||id.Length <1||string.IsNullOrEmpty(AddressId))
+            {
+                using (LsBuyEntities db = new LsBuyEntities())
+                {
+                    User user = db.Users.Where(t => t.UserName == User.Identity.Name).FirstOrDefault();
+                    List<ShoppingChartVModel> spcharts = db.Database.SqlQuery<ShoppingChartVModel>(@"select t1.Id,t1.ProductId CustomerProductId,t2.Image,
+t2.Color,t2.Text,t2.ProductId,
+t3.Price,t3.ProductName,t3.ModelNumber,t3.ImageUrl
+from ShoppingCharts t1
+left join CustomerProducts t2 on t1.ProductId= t2.Id
+left join Products t3 on t2.ProductId = t3.Id
+where t1.UserId = @userId", new SqlParameter("userId", user.Id)).ToList();
+                    List<AddressVModel> addresses = db.Database.SqlQuery<AddressVModel>(@"select * from Addresses where UserId=@userId", new SqlParameter("userId", user.Id)).ToList();
+                    ModelState.AddModelError("ValidMessage", "请选择收货地址或商品！");
+                    return View("ShoppingCharts", new ShoppingChartsVModel
+                    {
+                        Addresses = addresses,
+                        ShoppingCharts = spcharts
+                    });
+                }
+                
+            }
             using (LsBuyEntities db = new LsBuyEntities())
             {
                 User user = db.Users.Where(t => t.UserName == User.Identity.Name).FirstOrDefault();

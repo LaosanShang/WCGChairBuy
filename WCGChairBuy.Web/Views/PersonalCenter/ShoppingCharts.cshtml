@@ -53,6 +53,7 @@
                         <p><input type="radio" name="AddressId" value="@ad.Id" />@ad.Content</p>
                     }
                     <button class="btn btn-success">提交订单</button>
+                   <label style="color:red;">@Html.ValidationMessageFor(t=>t.ValidMessage)</label> 
                 </form>
             }
         </div>

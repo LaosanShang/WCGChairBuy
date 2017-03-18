@@ -31,6 +31,26 @@ namespace WCGChairBuy.Web.ViewModels
         /// 商品地址
         /// </summary>
         public string ImageUrl { get; set; }
+
+        public string OrderStatusName
+        {
+            get
+            {
+                string _orderStatusName = "已提交" ;
+                switch(OrderStatus)
+                {
+                    case 0:
+                        _orderStatusName = "已提交";
+                        break;
+                    case 1:
+                        _orderStatusName = "已确认";
+                        break;
+                    default:
+                        break;
+                };
+                return _orderStatusName;
+            }
+        }
         /// <summary>
         /// 商品列表
         /// </summary>

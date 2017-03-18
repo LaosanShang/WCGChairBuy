@@ -20,7 +20,8 @@
         <div class="form-group">
             <label class="control-label col-md-2">用户名</label> 
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                @Html.HiddenFor(model => model.UserName)
+                <label>@Model.UserName</label>
                 @Html.ValidationMessageFor(model => model.UserName)
             </div>
         </div>
@@ -36,7 +37,10 @@
         <div class="form-group">
             <label class="control-label col-md-2">用户类型</label> 
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.UserType, new { @class = "form-control" })
+                @*@Html.TextBoxFor(model => model.UserType, new { @class = "form-control" })*@
+
+                @Html.RadioButtonFor(model => model.UserType, "0", new { htmlAttributes = new { @class = "form-control" } }) 普通
+                @Html.RadioButtonFor(model => model.UserType, "1", new { htmlAttributes = new { @class = "form-control" } }) 管理员
                 @Html.ValidationMessageFor(model => model.UserType)
             </div>
         </div>
@@ -52,7 +56,9 @@
         <div class="form-group">
             <label class="control-label col-md-2">性别</label> 
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Sex,new { @class= "form-control" })
+                @*@Html.TextBoxFor(model => model.Sex,new { @class= "form-control" })*@
+                @Html.RadioButtonFor(model => model.Sex, "0", new { htmlAttributes = new { @class = "form-control" } })女
+                @Html.RadioButtonFor(model => model.Sex, "1", new { htmlAttributes = new { @class = "form-control" } })男
                 @Html.ValidationMessageFor(model => model.Sex)
             </div>
         </div>

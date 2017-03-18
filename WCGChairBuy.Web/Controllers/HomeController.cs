@@ -75,7 +75,7 @@ namespace WCGChairBuy.Web.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -122,6 +122,14 @@ namespace WCGChairBuy.Web.Controllers
             {
                 return View("Regist", registVModel);
             }
+        }
+        /// <summary>
+        /// 关于我们
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult About()
+        {
+            return View();
         }
     }
 }

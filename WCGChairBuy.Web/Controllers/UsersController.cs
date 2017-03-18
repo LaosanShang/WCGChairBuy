@@ -69,6 +69,8 @@ namespace WCGChairBuy.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                //默认密码 123456
+                user.Password = "123456";
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -107,7 +109,12 @@ namespace WCGChairBuy.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                var uforedit = db.Users.Where(t => t.Id == user.Id).FirstOrDefault();
+                uforedit.Phone = user.Phone;
+                uforedit.Sex = user.Sex;
+                uforedit.UserName = user.UserName;
+                uforedit.Email = user.Email;
+                db.Entry(uforedit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
