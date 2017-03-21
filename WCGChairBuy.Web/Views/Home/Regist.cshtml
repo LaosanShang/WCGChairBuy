@@ -3,73 +3,85 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-    
-    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        <h2>欢迎注册</h2>
-        @Html.AntiForgeryToken()
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            </div>
-            <div class="col-md-4">
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6">
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
-            </div>
-            <div class="col-md-4">
-                @Html.ValidationMessageFor(m => m.Phone)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Sex, new { @class = "col-md-2 control-label" })
-            <div class="col-md-1">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="Sex" id="optionsRadios1" value="1" checked="checked">男
-                    </label>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">欢迎注册新用户</div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.Email)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.Phone)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Sex, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-1">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="Sex" id="optionsRadios1" value="1" checked="checked">男
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="Sex" id="optionsRadios2" value="0">女
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.Sex)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-default" value="注册" />
+                            </div>
+                        </div>
+
+                    }
                 </div>
             </div>
-            <div class="col-md-1">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="Sex" id="optionsRadios2" value="0">女
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                @Html.ValidationMessageFor(m => m.Sex)
-            </div>
-        </div>
+            
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>
-            <div class="col-md-4">
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
-            <div class="col-md-4">
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="注册" />
-            </div>
-        </div>
+        <div class="col-lg-3"></div>
+    </div>
 
-    }
 </div>
