@@ -79,6 +79,68 @@ namespace WCGChairBuy.Web.Controllers
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// 添加到购物车-首页添加
+        /// </summary>
+        /// <param name="cvm"></param>
+        /// <returns></returns>
+        public ActionResult AddWithDefaultProduct(int productId)
+        {
+            try
+            {
+                using (LsBuyEntities db = new LsBuyEntities())
+                {
+                    string defaultColor = "red", defaultImage = "img1", defaultText = "";
+                    //获取当前登录用户信息
+                    User user = db.Users.Where(t => t.UserName == User.Identity.Name).FirstOrDefault();
+                    CustomerProduct cutomerPro =
+                        db.CustomerProducts.Where(t =>
+                        t.Color == defaultColor &&
+                    t.Text == defaultText &&
+                    t.Image == defaultImage &&
+                    t.ProductId == productId).FirstOrDefault();
+                    if (cutomerPro == null)
+                    {
+                        CustomerProduct customerPro = new CustomerProduct
+                        {
+                            Color = defaultColor,
+                            Image = defaultImage,
+                            Text = defaultText,
+                            ProductId = productId,
+                        };
+                        //添加定制产品
+                        db.CustomerProducts.Add(customerPro);
+                        db.SaveChanges();
+                        //查询定制产品
+                        cutomerPro =
+                        db.CustomerProducts.Where(t =>
+                        t.Color == defaultColor &&
+                    t.Text == defaultText &&
+                    t.Image == defaultImage &&
+                    t.ProductId == productId).FirstOrDefault();
+                    }
+
+                    //加入购物车
+                    ShoppingChart shoppingChart = new ShoppingChart
+                    {
+                        ProductId = cutomerPro.Id,
+                        UserId = user.Id,
+                        CreatedTime = DateTime.Now
+                    };
+                    //加入购物车
+                    db.ShoppingCharts.Add(shoppingChart);
+                    //保存到数据库
+                    db.SaveChanges();
+
+                    return Redirect("AddSuccess");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /// <summary>
         /// 添加成功
         /// </summary>

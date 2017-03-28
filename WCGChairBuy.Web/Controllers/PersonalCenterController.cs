@@ -271,7 +271,12 @@ where t1.UserId = @userId", new SqlParameter("userId", user.Id)).ToList();
         /// <returns></returns>
         public ActionResult Messages()
         {
-            return View();
+            using (Db.LsBuyEntities db = new Db.LsBuyEntities())
+            {
+                var messages = db.Messages.AsNoTracking().Where(t => t.Createdby == User.Identity.Name)
+                    .ToList();
+                return View(messages);
+            }
         }
     }
 }
