@@ -37,11 +37,14 @@
                                     <p>颜色:<i class="glyphicon glyphicon-stop" style="color:@spc.Color"></i></p>
                                     <p>文字:@spc.Text</p>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <p>图案:<img src="~/Images/selectImgs/@spc.ImageName" height="100" /></p>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="checkbox" name="id" value="@spc.CustomerProductId" />
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="@Url.Action("Remove","ShoppingChart",new { id =spc.Id})" >删除</a>
                                 </div>
                             </div>
                         </div>

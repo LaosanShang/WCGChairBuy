@@ -149,5 +149,20 @@ namespace WCGChairBuy.Web.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Remove(int id)
+        {
+            using (LsBuyEntities db = new LsBuyEntities())
+            {
+                var shopchart= db.ShoppingCharts.Where(t => t.Id == id).FirstOrDefault();
+                db.ShoppingCharts.Remove(shopchart);
+                db.SaveChanges();
+                return RedirectToAction("ShoppingCharts", "PersonalCenter");
+            }
+        }
     }
 }
