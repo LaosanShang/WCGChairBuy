@@ -8,6 +8,7 @@ using WCGChairBuy.Web.ViewModels;
 
 namespace WCGChairBuy.Web.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
         /// <summary>

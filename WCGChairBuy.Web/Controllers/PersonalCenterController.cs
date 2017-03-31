@@ -111,7 +111,7 @@ where t1.UserId = @userId", new SqlParameter("userId", user.Id)).ToList();
                 };
                 db.Orders.Add(order);
                 //订单详情
-                db.ShoppingCharts.Where(t => id.Contains(t.Id)).ToList()
+                db.CustomerProducts.Where(t => id.Contains(t.Id)).ToList()
                     .ForEach(t =>
                     {
                         OrderDetail detail = new OrderDetail

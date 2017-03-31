@@ -10,24 +10,32 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
     <style type="text/css">
-        body{padding:0 20px;}
-        h1, h2, h3 {
-            font-family:'Microsoft YaHei';
+        body {
+            padding: 0 20px;
         }
-        dd,dt{padding:5px;}
+
+        h1, h2, h3 {
+            font-family: 'Microsoft YaHei';
+        }
+
+        dd, dt {
+            padding: 5px;
+        }
+
         .description p {
             position: relative;
             line-height: 1.4em;
             height: 4.2em;
             overflow: hidden;
         }
-        .description p::after {
-            content: "...";
-            font-weight: bold;
-            position: absolute;
-            bottom: 0px;
-            right: 0;
-        }
+
+            .description p::after {
+                content: "...";
+                font-weight: bold;
+                position: absolute;
+                bottom: 0px;
+                right: 0;
+            }
     </style>
 </head>
 <body>
@@ -44,10 +52,13 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="@Url.Action("Index","Users")">用户管理</a></li>
-                    <li><a href="@Url.Action("Index","Products")">产品管理</a></li>
-                    <li><a href="@Url.Action("Index","Orders")">订单管理</a></li>
-                    @*<li><a href="@Url.Action("Index","Message")">消息管理</a></li>*@
+                    @if (User.Identity.IsAuthenticated && User.Identity.Name == "admin")
+                    {
+                        <li><a href="@Url.Action("Index", "Users")">用户管理</a></li>
+                        <li><a href="@Url.Action("Index", "Products")">产品管理</a></li>
+                        <li><a href="@Url.Action("Index", "Orders")">订单管理</a></li>
+                        @*<li><a href="@Url.Action("Index","Message")">消息管理</a></li>*@
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
@@ -74,6 +85,7 @@
         </div><!-- /.container-fluid -->
     </nav>
     @RenderBody()
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </body>

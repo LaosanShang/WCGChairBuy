@@ -75,6 +75,11 @@ namespace WCGChairBuy.Web.Controllers
 
             return View(product);
         }
+
+        /// <summary>
+        /// 保存上传文件
+        /// </summary>
+        /// <returns></returns>
         private string SaveFile()
         {
             string info = string.Empty;
